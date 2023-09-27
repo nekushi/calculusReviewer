@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculus Reviewer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            height: auto;
+            overflow: scroll;
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .formula-container, .quiz-container {
+            margin: 100px 0;
+        }
+        .formula-container {
+            position: relative;
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: space-around;
+            align-items: center;
+            width: 800px;
+            height: 1000px;
+            border: 10px dashed black;
+            border-radius: 50px;
+        }
+        .head {
+            font-size: 5rem;
+        }
+        .formulas {
+            width: 650px;
+            height: 700px;
+            border: 10px dashed black;
+            border-radius: 30px;
+            display: flex;
+            overflow: scroll;
+            scroll-snap-type: x mandatory;
+            gap: 20px;
+        }
+        .formulas div {
+            flex-shrink: 0;
+            width: 500px;
+            height: 550px;
+            scroll-snap-align: center;
+            font-size: 5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-flow: column nowrap;
+            padding: 20px 50px;
+        }
+        .formulas div:first-child {
+            margin-left: 70px;
+        }
+        .formulas div:last-child {
+            margin-right: 60px;
+        }
+        .formulas div * {
+            font-size: 3rem;
+            line-height: 50px;
+        }
+        .formulas div p span {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+        .quiz-container {
+            padding: 20px;
+            width: 800px;
+            height: 1000px;
+            border: 10px dashed black;
+            border-radius: 70px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+            grid-gap: 30px 30px;
+        }
+        .question {
+            grid-area: 1 / 1 / 3 / 5;
+        }
+        .a {
+            grid-area: 3 / 1 / 4 / 3;
+        }
+        .b {
+            grid-area: 3 / 3 / 4 / 5;
+        }
+        .c {
+            grid-area: 4 / 1 / 4 / 3;
+        }
+        .d {
+            grid-area: 4 / 3 / 5 / 5;
+        }
+        .quiz-container > * {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5rem;
+        }
+        .question {
+            border: 7px dashed black;
+            border-radius: 50px;
+            font-size: 3rem;
+            font-weight: 700;
+        }
+        .quiz-container > button, .show, .next {
+            border-radius: 50px;
+            border: 5px dashed black;
+            outline: none;
+        }
+        /*
+        .quiz-container > button:focus {
+            border: 10px solid black;
+        }
+        */
+        .show {
+            grid-area: 5 / 1 / 6 / 3;
+            background: #1d1d16;
+            color: #ddd;
+            border: 10px dashed #ddd;
+        }
+        .next {
+            grid-area: 5 / 3 / 6 / 5;
+            background: #1d1d16;
+            color: #ddd;
+            border: 10px dashed #ddd;
+        }
+        .show:active, .next:active {
+            background: green;
+            border: 10px dashed #ddd;
+        }
+       
+    </style>
+</head>
+<body>
+    <div class="formula-container">
+        <h1 class="head">Calculus's Formulas</h1>
+        <div class="formulas">
+            <div>
+                <h2>Square of binomial</h2>
+                <p>a²+2ab+b²<br />a²–2ab+b²</p>
+            </div>
+            <div>
+                <h2>Cube of binomial</h2>
+                <p>a³+3a²b+3ab²+b³<br />a³–3a²b+3ab²–b³</p> 
+            </div>
+            <div>
+                <h2>Functions</h2>
+                <p>f(x)=equation<br />f(3); f(2); f(1)</p>
+            </div>
+            <div>
+                <h2>Factoring</h2>
+                <p>a²–b² = (a+b)(a–b)<br /><span>NOTE: factors of contant should be the<br />sum of the middle term numerical coefficient</span></p>
+            </div>
+            <div>
+                <h2>Limitations</h2>
+                <p>lim C<br />x => n<br />ans: C</p>
+            </div>
+            <div>
+                <h2>Limitations</h2>
+                <p>eg.<br />lim ax²+bx+c<br />x => n<br />*substitute<br />*simplify<br />=a(n)²+b(n)+c</p>
+            </div>
+            <div>
+                <h2>Limitations</h2>
+                <p>lim (ax²+bx+c)/(dx-e)<br />x => n<br /><span>NOTE: your answer should not be equal to 0, else do factoring</span></p>
+            </div>
+            <div>
+                <h2>Limitations</h2>
+                <p>lim (√x—c)/(x-n)<br />x => n<br /><span>NOTE: your answer should not be equal to 0, else multiply both numerator and denominator to the conjugate of the side with radical, then cancelation then simplify</span><br />*Conjugate = reverse the arithmetic operator of the expression with radical<br />* + => — or — => +</p>
+            </div>
+            <div>
+                <h2>Derivatives</h2>
+                <p>1. x => x + ∆x
+                <br />2. simplify
+                <br />3. subtract the given from the result
+                <br />4. divide each term by x+∆x
+                <br />5. lim of result as ∆x => 0
+                <br /><span>y' = naxⁿ¯¹ + nbxⁿ¯¹ and so on</span></p>
+            </div>
+            <div>
+                <h2>Constant Rule</h2>
+                <p>y = C<br />y' = C</p>
+            </div>
+            <div>
+                <h2>Power Rule</h2>
+                <p>y = xⁿ<br />y' = nxⁿ¯¹</p> 
+            </div>
+            <div>
+                <h2>Constant Multiple Rule</h2>
+                <p>hehe di ko alam</p>
+            </div>
+            <div>
+                <h2>Derivative of a Sum or a Difference </h2>
+                <p>hehe di ko rin alam</p>
+            </div>
+            <div>
+                <h2>Product Rule</h2>
+                <p>y = f(x)*g(x)<br />y' = f(x)*g'(x) + g(x)*f'(x)</p>
+            </div>
+            <div>
+                <h2>Quotient Rule</h2>
+                <p>y = u / v<br />y' = [v*du — (u*dv)] / v²</p>
+            </div>
+            <div>
+                <h2>Chain Rule</h2>
+                <p>y = (ax²+bx+c)ⁿ<br /><br />y' = n(ax²+bx+c)ⁿ¯¹ * derivative of given</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="quiz-container">
+        <div class="question">
+            
+        </div>
+        <button class="a">
+            
+        </button>
+        <button class="b">
+            
+        </button>
+        <button class="c">
+            
+        </button>
+        <button class="d">
+            
+        </button>
+        <div class="show">
+            Show Answer
+        </div>
+        <div class="next">
+            Get Started!
+        </div>
+    </div>
+</body>
+
+<script>
+    
+    /*
+    
+    f[4] = done
+    limits[4] = done
+    derivatives = done
+    product = 0 / 5
+    quotient = 5
+    chain = done
+    
+    */
+    
+    const quizzes = [
+        { // 0
+            e: "Simplify me: (x + 2)²", 
+            a: "x² + 2x + 4", 
+            b: "x² + 4x + 4", 
+            c: "x² — 4x + 4", 
+            d: "x² — 2x + 4",
+        }, { // 1
+            e: "Simplify me: (x² — 3)²", 
+            a: "x⁴ — 6x² + 9", 
+            b: "x⁴ + 12x³ + 27", 
+            c: "x⁴ — 6x + 27", 
+            d: "x⁴ — 6x² — 9",
+        }, { // 2
+            e: "Conjugate: 1 — √x", 
+            a: "—√x + 1", 
+            b: "—1 + √x", 
+            c: "1 + √x", 
+            d: "√x — 1",
+        }, { // 3
+            e: "Simplify me: (x — 3x²)²", 
+            a: "x² — 6x + 9", 
+            b: "x² + 6x² — 9", 
+            c: "x² — 6x² + 9x⁴", 
+            d: "x² — 6x³ + 9x⁴",
+        }, { // 4
+            e: "Quotient rule: y = (3x² — 8x) / (5x + 4)", 
+            a: "y' = (15x² + 36x + 40) / (5x + 4)²", 
+            b: "y' = (15x² + 24x - 32) / (5x + 4)²", 
+            c: "y' = (30x² + 42x + 40) / (5x + 4)²", 
+            d: "y' = (30x² + 15x + 24) / (5x + 4)²",
+        }, { // 5
+            e: "Quotient rule: y = (5x + 1) / (3x — 4)", 
+            a: "y' = (15x — 20) / (3x — 4)²", 
+            b: "y' = 20 / (3x — 4)²", 
+            c: "y' = —23 / (3x — 4)²", 
+            d: "y' = (12x + 16) / (3x — 4)²",
+        }, { // 6
+            e: "Quotient rule: y = (4x — 2) / (x² + 1)", 
+            a: "y' = (—4x² + 4x + 4) / (x² + 1)²", 
+            b: "y' = (2x² + 2x — 2) / (x² + 1)²", 
+            c: "y' = (x² + 4x + 4) / (x² + 1)²", 
+            d: "y' = (—2x² — 2x + 4) / (x² + 1)²",
+        }, { // 7
+            e: "Quotient rule: y = (x + 2) / (3x + 1)", 
+            a: "y' = —5 / (3x + 1)²", 
+            b: "y' = (—10x² + 5) / (3x + 1)²", 
+            c: "y' = (10x² — 5) / (3x + 1)²", 
+            d: "y' = 5 / (3x + 1)²",
+        }, { // 8
+            e: "Quotient rule: y = (x³ + 2x) / (x — 1)", 
+            a: "y' = (4x³ — 3x² + 4x - 2) / (x — 1)²", 
+            b: "y' = (4x² - 2x + 4) / (x — 1)²", 
+            c: "y' = (3x + 2) / (x — 1)²", 
+            d: "y' = (2x³ — 3x² — 2) / (x — 1)²",
+        }, { // 9
+            e: "lim (√x — 2) / (x — 4)\nx => 4", 
+            a: "= 1 / 2", 
+            b: "= 2", 
+            c: "= 1 / 4", 
+            d: "= 4",
+        }, { // 10
+            e: "lim (x — 25) / (√x — 5)\nx => 25", 
+            a: "= 1 / 10", 
+            b: "= 10", 
+            c: "= 1 / 5", 
+            d: "= 5",
+        }, { // 11
+            e: "lim (√x - 64) / (x — 4096)\nx => 4096", 
+            a: "= 1 / 128", 
+            b: "= 128", 
+            c: "= 1 / 64", 
+            d: "= 64",
+        }, { // 12
+            e: "lim [(√x—1) — 1] / (x — 2)\nx => 2", 
+            a: "= 1 / 2", 
+            b: "= 2", 
+            c: "= 1 / 4", 
+            d: "= 4",
+        }, { // 13
+            e: "Simplify me: (2x² + 4)²", 
+            a: "4x⁴ — 16x² + 16", 
+            b: "4x² — 16x + 16", 
+            c: "4x² + 16x + 16", 
+            d: "4x⁴ + 16x² + 16",
+        }, { // 14
+            e: "Simplify me: (5x² — 3)²", 
+            a: "25x⁴ — 15x² + 9", 
+            b: "25x² — 30x + 9", 
+            c: "25x⁴ — 30x² + 9", 
+            d: "25x² + 15x + 9",
+        }, { // 15
+            e: "lim 420\nx => 69", 
+            a: "= 69", 
+            b: "= 420", 
+            c: "= 69420", 
+            d: "= 42069",
+        }, { // 16
+            e: "lim 100\nx => 1000", 
+            a: "= 100", 
+            b: "= 1000", 
+            c: "= 100000", 
+            d: "= all of the above",
+        }, { // 17
+            e: "lim 1\nx => 9", 
+            a: "= 9", 
+            b: "= 4", 
+            c: "= 1", 
+            d: "= 0",
+        }, { // 18
+            e: "lim π\nx => 0", 
+            a: "= 3", 
+            b: "= 2", 
+            c: "= 0", 
+            d: "= π",
+        }, { // 19
+            e: "lim C\nx => n", 
+            a: "= C", 
+            b: "= n", 
+            c: "= undefined", 
+            d: "= yawa",
+        }, { // 20
+            e: "Simplify me: (x + 3)³", 
+            a: "x³ — 9x² + 27x — 27", 
+            b: "x³ + 3x² + 9x + 27", 
+            c: "x³ — 3x² + 9x — 27", 
+            d: "x³ + 9x² + 27x + 27",
+        }, { // 21
+            e: "Simplify me: (2x — 3)³", 
+            a: "8x³ — 12x² + 18x — 27", 
+            b: "8x³ + 12x² + 18x + 27", 
+            c: "8x³ + 36x² + 54x + 27", 
+            d: "8x³ — 36x² + 54x — 27",
+        }, { // 22
+            e: "Simplify me: (7x³ — 6x²)³", 
+            a: "343x^9 — 294x^8 + 252x^7 — 216x^6", 
+            b: "343x^9 — 882x^8 + 756x^7 — 216x^6", 
+            c: "343x^9 — 882x^5 + 756x^5 — 216x^6", 
+            d: "343x^9 — 512x^8 + 729x^7 — 216x^6",
+        }, { // 23
+            e: "Simplify me: (3x²+4x)³", 
+            a: "27x⁶ + 54x⁵ + 72x⁴ + 64x³", 
+            b: "27x⁶ + 108x⁵ + 144x⁴ + 64x³", 
+            c: "27x⁶ + 36x⁵ + 48x⁴ + 64x³", 
+            d: "27x⁶ + 81x⁵ + 125x⁴ 64x³",
+        }, { // 24
+            e: "Simplify me: (2x+6)³", 
+            a: "8x³ + 72x² + 144x + 216", 
+            b: "8x³ + 36x² + 72x + 216", 
+            c: "8x³ + 72x² + 216x + 216", 
+            d: "8x³ + 36x² + 144x + 216",
+        }, { // 25
+            e: "lim 5x\nx => 6", 
+            a: "= 30", 
+            b: "= 25", 
+            c: "= 60", 
+            d: "= 11",
+        }, { // 26
+            e: "lim 9x — 18\nx => 2", 
+            a: "= 36", 
+            b: "= 0", 
+            c: "= 18", 
+            d: "= —18",
+        }, { // 27
+            e: "lim x² + 5x + 6\nx => 3", 
+            a: "= 27", 
+            b: "= 54", 
+            c: "= 42", 
+            d: "= 30",
+        }, { // 28
+            e: "lim x + 10\nx => 9", 
+            a: "= 16", 
+            b: "= 17", 
+            c: "= 18", 
+            d: "= 19",
+        }, { // 29
+            e: "lim x³ — 9x² + 18x — 27\nx => 3", 
+            a: "= 36", 
+            b: "= —45", 
+            c: "= —27", 
+            d: "= 18",
+        }, { // 30
+            e: "lim (x² — 4x — 12) / (x — 6)\nx => 6", 
+            a: "= —12", 
+            b: "= 8", 
+            c: "= —6", 
+            d: "= 4",
+        }, { // 31
+            e: "lim (x + 3) / (x² + 5x + 6)\nx => —3", 
+            a: "= —1", 
+            b: "= 1", 
+            c: "= 2", 
+            d: "= —2",
+        }, { // 32
+            e: "lim (x — 8) / (x² — 64)\nx => 8", 
+            a: "= 0", 
+            b: "= 8", 
+            c: "= 16", 
+            d: "= 64",
+        }, { // 33
+            e: "lim (x² + 6x + 9) / (x + 3)\nx => —3", 
+            a: "= 3", 
+            b: "= —6", 
+            c: "= 6", 
+            d: "= —9",
+        }, { // 34
+            e: "lim (x² — 25) / (x — 5)\nx => 5", 
+            a: "= 15", 
+            b: "= 20", 
+            c: "= 5", 
+            d: "= 10",
+        }, { // 35
+            e: "Factor me: (x² — 25)", 
+            a: "(x — 5)(x — 5)", 
+            b: "(x + 5)(x + 5)", 
+            c: "(x + 5)(x — 5)", 
+            d: "hakdog",
+        }, { // 36
+            e: "Factor me: (4x² — 9)", 
+            a: "(2x + 3)(2x + 3)", 
+            b: "(2x + 3)(2x — 3)", 
+            c: "(2x — 3)(2x — 3)", 
+            d: "hakdog",
+        }, { // 37
+            e: "Simplify me: (3x² + 2x)(3x² — 2x)", 
+            a: "9x⁴ — 4x²", 
+            b: "9x⁴ + 4x²", 
+            c: "9x² — 4x", 
+            d: "9x² + 4x",
+        }, { // 38
+            e: "Factor me: 2x² — 3x — 2", 
+            a: "(2x — 2)(x — 1)", 
+            b: "(2x + 1)(x — 2)", 
+            c: "(2x — 1)(x + 2)", 
+            d: "(2x + 1)(x + 2)",
+        }, { // 39
+            e: "Factor me: 3x — 6", 
+            a: "3(x + 6)", 
+            b: "3(x — 6)", 
+            c: "3(x + 2)", 
+            d: "3(x — 2)",
+        }, { // 40
+            e: "f(x) = x² + 2x + 3\nf(i — 1) = ??", 
+            a: "f(i — 1) = i", 
+            b: "f(i — 1) = 3i²", 
+            c: "f(i — 1) = i² + 2", 
+            d: "f(i — 1) = 3 + i²",
+        }, { // 41
+            e: "f(x) = x² — 4\nf(—2) = ??", 
+            a: "f(—2) = —2", 
+            b: "f(—2) = 0", 
+            c: "f(—2) = 8", 
+            d: "f(—2) = 4",
+        }, { // 42
+            e: "f(x) = x² + 5x + 6\nf(0) = ??", 
+            a: "f(0) = hakdog", 
+            b: "f(0) = 0", 
+            c: "f(0) = 6", 
+            d: "f(0) = undefined",
+        }, { // 43
+            e: "f(x) = x\nf(5) = ??", 
+            a: "0", 
+            b: "hakdog", 
+            c: "delulu", 
+            d: "5",
+        }, { // 44
+            e: "f(x) = x + x + x + x\nf(4) = ??", 
+            a: "f(4) = 4", 
+            b: "f(4) = 8", 
+            c: "f(4) = 12", 
+            d: "f(4) = 16",
+        }, { // 45
+            e: "Derivatives: y = 5x² + 4x + 1", 
+            a: "y' = 10x² + 4x", 
+            b: "y' = 5x + 4 + 1", 
+            c: "y' = 15x² + 8x", 
+            d: "y' = 10x + 4",
+        }, { // 46
+            e: "Derivatives: y = 8x⁴", 
+            a: "y' = 32x³", 
+            b: "y' = 32x⁴", 
+            c: "y' = 8x³", 
+            d: "y' = 8x⁴",
+        }, { // 47
+            e: "Convert me: √x", 
+            a: "x²", 
+            b: "x", 
+            c: "x½", 
+            d: "1 / x",
+        }, { // 48
+            e: "Convert me: x¯¹", 
+            a: "x½", 
+            b: "1 / x", 
+            c: "x", 
+            d: "x²",
+        }, { // 49
+            e: "Simplify me: √x½", 
+            a: "x½", 
+            b: "x", 
+            c: "√x", 
+            d: "—x",
+        }, { // 50
+            e: "Chain rule: y = (x³ + 3)⁵", 
+            a: "y' = 5x³(x³ + 3)⁴", 
+            b: "y' = 15x³(x³ + 3)⁴", 
+            c: "y' = 15x²(x³ + 3)⁴", 
+            d: "y' = 5x²(x³ + 3)⁴",
+        }, { // 51
+            e: "Chain rule: y = (x — 2)³", 
+            a: "y' = 3(x — 2)³", 
+            b: "y' = 3(x — 2)²", 
+            c: "y' = (x — 2)²", 
+            d: "y' = hakdog",
+        }, { // 52
+            e: "Chain rule: y =  (3x² — 9x + 2)³", 
+            a: "y' = 18x — 27(3x² — 9x + 2)²", 
+            b: "y' = 18x² — 27x + 6(3x² — 9x + 2)²", 
+            c: "y' = 18x² — 27x + 6(3x — 9)³", 
+            d: "y' = 18x — 27(3x² — 9x + 2)³",
+        }, { // 53
+            e: "Chain rule: y =  (30x³ + 40x + 20)⅔ / ", 
+            a: "y' = (180x² + 96) / 3³√(30x³ + 40x + 20)", 
+            b: "y' = (180x² + 90) / 3³√(30x³ + 40x + 20)", 
+            c: "y' = (180x² + 80) / 3³√(30x³ + 40x + 20)", 
+            d: "y' = (180x² + 74) / 3³√(30x³ + 40x + 20)",
+        }, { // 54
+            e: "Chain rule: y = [(66x³ + 70x) / (9x³ + 2x)]^5/6", 
+            a: "y' = 1008(9x³ + 2x)^1/6 / (66x³ + 70x)^1/6 (9x³ + 2x)²", 
+            b: "y' = 830(9x² + 2)^1/6 / (66x³ + 70x)^1/6 (9x³ + 2x)²", 
+            c: "y' = —1008(9x³ + 2x)² / (66x³ + 70x)^1/6 (9x³ + 2x)²", 
+            d: "y' = —830(9x³ + 2x)^1/6 / (66x³ + 70x)^1/6 (9x³ + 2x)²",
+        }, { // 55
+            e: "Product rule: (50x^5 + 33x^6)(20x⁴ — 5)", 
+            a: "y' = 3726x^9 + 1274x^8 — 770x^5 — 876x⁴", 
+            b: "y' = 3036x^9 + 1000x^8 — 880x^5 — 950x⁴", 
+            c: "y' = 3036x^9 + 9000x^8 — 990x^5 — 1250x⁴", 
+            d: "y' = 3829x^9 + 2500x^8 — 1010x^5 — 937x⁴",
+        }, { // 56
+            e: "Product rule: y = (47x⁴ + 70x^5)(25x³ — 16)", 
+            a: "y' = 8802x^7 + 8225x^5 — 5600x³ — 1128", 
+            b: "y' = 8800x^7 + 8200x^6 — 5600x⁴ — 1128x³", 
+            c: "y' = 8802x^7 + 8225x^6 — 5600x⁴ — 1128x³", 
+            d: "y' = 8802x^7 + 8225x^5 — 5600x⁴ — 1128",
+        }, { // 57
+            e: "Product rule: y = (2x⁴ + 3x³)(9x² + 7x)", 
+            a: "y' = 116x^5 + 196x⁴ + 87x³", 
+            b: "y' = 208x^5 + 216x⁴ + 78x³", 
+            c: "y' = 216x^5 + 200x⁴ + 81x³", 
+            d: "y' = 108x^5 + 205x⁴ + 84x³",
+        }, { // 58
+            e: "Product rule: y = (8x^5 — 7x²)(6x³ + 5x^6)", 
+            a: "y' = 220x^10 + 52x^7 — 105x⁴ ", 
+            b: "y' = 440x^10 + 104x^7 — 210x⁴", 
+            c: "y' = 420x^10 + 104x^7 — 105x⁴", 
+            d: "y' = 240x^10 + 52x^7 — 210x⁴ ",
+        }, { // 59
+            e: "Product rule: y = (2x² + x)(3x + 1)", 
+            a: "y' = 18x² + 10x + 1", 
+            b: "y' = 36x² + 20x + 2", 
+            c: "y' = 18x² + 5x + 1", 
+            d: "y' = 36x² + 10x + 2",
+        }, 
+    ]
+    
+    // here lies
+    const eph = document.querySelector('.question');
+    const choices = document.querySelectorAll('.quiz-container > button');
+    const aph = document.querySelector('.a');
+    const bph = document.querySelector('.b');
+    const cph = document.querySelector('.c');
+    const dph = document.querySelector('.d');
+    const show = document.querySelector('.show');
+    const next = document.querySelector('.next');
+    
+    let num;
+    function nextEq() {
+        eph.innerText = quizzes[num].e;
+        aph.innerText = quizzes[num].a;
+        bph.innerText = quizzes[num].b;
+        cph.innerText = quizzes[num].c;
+        dph.innerText = quizzes[num].d; 
+    }
+    
+    next.addEventListener("click", function() {
+        num;
+        aph.style.background = "white";
+        bph.style.background = "white";
+        cph.style.background = "white";
+        dph.style.background = "white";
+        eph.style.background = "#fff";
+        next.innerText = "Next Question";
+        let i = Math.floor(Math.random() * 60);
+        num = i;
+        nextEq();
+    })
+    
+    show.addEventListener("click", function() {
+        if (num === 1 ||
+            num === 6 ||
+            num === 7 ||
+            num === 11 ||
+            num === 12 ||
+            num === 16 ||
+            num === 19 ||
+            num === 25 ||
+            num === 31 ||
+            num === 37 ||
+            num === 46 ||
+            num === 52 ||
+            num === 59) {
+            eph.innerText = `Answer: ${aph.innerText}`;
+        } else if (num === 0 ||
+            num === 4 ||
+            num === 10 ||
+            num === 15 ||
+            num === 22 ||
+            num === 23 ||
+            num === 26 ||
+            num === 30 ||
+            num === 33 ||
+            num === 36 ||
+            num === 38 ||
+            num === 41 ||
+            num === 48 ||
+            num === 49 ||
+            num === 51 ||
+            num === 58) {
+            eph.innerText = `Answer: ${bph.innerText}`;
+        } else if (num === 2 ||
+            num === 5 ||
+            num === 9 ||
+            num === 14 ||
+            num === 17 ||
+            num === 24 ||
+            num === 29 ||
+            num === 32 ||
+            num === 35 ||
+            num === 40 ||
+            num === 42 ||
+            num === 47 || 
+            num === 50 || 
+            num === 53 ||
+            num === 55 || 
+            num === 56) {
+            eph.innerText = `Answer: ${cph.innerText}`;
+        } else if (num === 3 ||
+            num === 8 ||
+            num === 13 ||
+            num === 18 ||
+            num === 20 ||
+            num === 21 ||
+            num === 27 ||
+            num === 28 ||
+            num === 34 ||
+            num === 39 || 
+            num === 43 ||
+            num === 44 ||
+            num === 45 || 
+            num === 54 ||
+            num === 57) {
+            eph.innerText = `Answer: ${dph.innerText}`;
+        } 
+    })
+    
+    
+    aph.addEventListener("click", function() {
+        if (num === 1 ||
+            num === 6 ||
+            num === 7 ||
+            num === 11 ||
+            num === 12 ||
+            num === 16 ||
+            num === 19 ||
+            num === 25 ||
+            num === 31 ||
+            num === 37 ||
+            num === 46 ||
+            num === 52 ||
+            num === 59) {
+                aph.style.background = "#71ff6a";
+                eph.innerText = `Answer: ${aph.innerText}`;
+                eph.style.background = "#71ff6a";
+            } else {
+                aph.style.background = "tomato";
+                eph.style.background = "tomato";
+            }
+    })
+    
+    bph.addEventListener("click", function() {
+        if (num === 0 ||
+            num === 4 ||
+            num === 10 ||
+            num === 15 ||
+            num === 22 ||
+            num === 23 ||
+            num === 26 ||
+            num === 30 ||
+            num === 33 ||
+            num === 36 ||
+            num === 38 ||
+            num === 41 ||
+            num === 48 ||
+            num === 49 ||
+            num === 51 ||
+            num === 58) {
+                bph.style.background = "#71ff6a";
+                eph.innerText = `Answer: ${bph.innerText}`
+                eph.style.background = "#71ff6a";
+            } else {
+                bph.style.background = "tomato";
+                eph.style.background = "tomato";
+            }
+    })
+    
+    cph.addEventListener("click", function() {
+        if (num === 2 ||
+            num === 5 ||
+            num === 9 ||
+            num === 14 ||
+            num === 17 ||
+            num === 24 ||
+            num === 29 ||
+            num === 32 ||
+            num === 35 ||
+            num === 40 ||
+            num === 42 ||
+            num === 47 || 
+            num === 50 || 
+            num === 53 ||
+            num === 55 || 
+            num === 56) {
+                cph.style.background = "#71ff6a";
+                eph.innerText = `Answer: ${cph.innerText}`;
+                eph.style.background = "#71ff6a";
+            } else {
+                cph.style.background = "tomato";
+                eph.style.background = "tomato";
+            }
+    })
+    
+    dph.addEventListener("click", function() {
+        if (num === 3 ||
+            num === 8 ||
+            num === 13 ||
+            num === 18 ||
+            num === 20 ||
+            num === 21 ||
+            num === 27 ||
+            num === 28 ||
+            num === 34 ||
+            num === 39 || 
+            num === 43 ||
+            num === 44 ||
+            num === 45 || 
+            num === 54 ||
+            num === 57) {
+                dph.style.background = "#71ff6a";
+                eph.innerText = `Answer: ${dph.innerText}`;
+                eph.style.background = "#71ff6a";
+            } else {
+                dph.style.background = "tomato";
+                eph.style.background = "tomato";
+            }
+    })
+    
+</script>
+</html>
